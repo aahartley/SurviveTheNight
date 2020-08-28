@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     public void openGame(){
         Intent intent = new Intent(this,Game.class);
         startActivity(intent);
+        finish();
     }
     public void speakIntro(){
         final String msg ="Welcome to Survive the Night, the premise is simple"+

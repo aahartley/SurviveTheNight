@@ -19,6 +19,9 @@
         <activity android:name=".Game"  >
 
         </activity>
+        <activity android:name=".End">
+
+        </activity>
     </application>
 
 </manifest>

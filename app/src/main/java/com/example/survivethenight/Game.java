@@ -1,5 +1,6 @@
 package com.example.survivethenight;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -13,25 +14,54 @@ public class Game extends AppCompatActivity {
 
     private boolean shot = false;
     public int counter =0;
+    MediaPlayer mP;
+    MediaPlayer mP2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        final MediaPlayer gunShot = MediaPlayer.create(this, R.raw.gun);
+
+        mP = MediaPlayer.create(this,R.raw.walking);
+        mP.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mP.release();
+                mP = MediaPlayer.create(Game.this, R.raw.bg);
+                mP.start();
+
+
+            }
+        });
+        mP.start();
+
 
         final TextView tV = findViewById(R.id.time2);
 
-        new CountDownTimer(10000,1000){
+        new CountDownTimer(20000,1000){
             @Override
             public void onTick(long millisUntilFinished) {
                 tV.setText((String.valueOf(counter)));
                 counter++;
-                if(counter ==5)
-                    gunShot.start();
+                if(counter ==5){
+                    mP2 = MediaPlayer.create(Game.this, R.raw.gun);
+                    mP2.start();
+                }
                     if(counter ==6 && !shot) {
-                        tV.setText("you lose");
+                        mP.stop();
+                        cancel();
+                        endGame();
+                        finish();
                     }
+                    if(counter == 10) {
+                        shot = false;
+                        mP2.start();
+                    }
+                         if(counter ==12 && !shot) {
+                            tV.setText(R.string.youLose);
+                            cancel();
+                }
+
 
 
             }
@@ -43,10 +73,6 @@ public class Game extends AppCompatActivity {
         }.start();
 
 
-        final MediaPlayer backG = MediaPlayer.create(this, R.raw.walking);
-       // final MediaPlayer kill1 = MediaPlayer.create(this, R.raw.gun);
-
-        backG.start();
 
 
 
@@ -56,12 +82,18 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 shot = true;
-                gunShot.start();
+                mP2 = MediaPlayer.create(Game.this,R.raw.gun);
+                mP2.start();
 
             }
         });
 
 
+    }
+    public void endGame(){
+        Intent intent = new Intent(this,End.class);
+        startActivity(intent);
+        finish();
     }
 
 }
