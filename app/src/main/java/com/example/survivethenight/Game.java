@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Game extends AppCompatActivity {
-
+    public int bullets =2;
     private boolean shot = false;
     public int counter =0;
     MediaPlayer mP;
@@ -46,12 +46,12 @@ public class Game extends AppCompatActivity {
                 if(counter ==5){
                     mP2 = MediaPlayer.create(Game.this, R.raw.gun);
                     mP2.start();
+                    shot = false;
                 }
                     if(counter ==6 && !shot) {
                         mP.stop();
                         cancel();
                         endGame();
-                        finish();
                     }
                     if(counter == 10) {
                         shot = false;
@@ -82,11 +82,16 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 shot = true;
+                bullets --;
                 mP2 = MediaPlayer.create(Game.this,R.raw.gun);
                 mP2.start();
 
             }
         });
+        if(bullets ==0){
+            bt.setEnabled(false);
+        }
+
 
 
     }
