@@ -63,7 +63,7 @@ public class Game extends AppCompatActivity implements SensorEventListener {
         final TextView tV = findViewById(R.id.time2);
         final TextView tv2 = findViewById(R.id.time3);
 
-        new CountDownTimer(60000,1000){
+        new CountDownTimer(1410000,1000){
             @Override
             public void onTick(long millisUntilFinished) {
                 tV.setText((String.valueOf(counter)));
@@ -95,6 +95,51 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                             cancel();
                             endGame();
                 }
+                if(counter ==29){
+                    shot = false;
+                }
+                if(counter ==31&& !shot) {
+                    mP.stop();
+                    die();
+                    cancel();
+                    endGame();
+                }
+                if(counter ==44){
+                    shot = false;
+                }
+                if(counter ==46&& !shot) {
+                    mP.stop();
+                    die();
+                    cancel();
+                    endGame();
+                }
+                if(counter ==47){
+                    shot = false;
+                }
+                if(counter ==49&& !shot) {
+                    mP.stop();
+                    die();
+                    cancel();
+                    endGame();
+                }
+                if(counter ==74){
+                    shot = false;
+                }
+                if(counter ==76&& !shot) {
+                    mP.stop();
+                    die();
+                    cancel();
+                    endGame();
+                }
+                if(counter ==130){
+                    shot = false;
+                }
+                if(counter ==132&& !shot) {
+                    mP.stop();
+                    die();
+                    cancel();
+                    endGame();
+                }
 
 
 
@@ -102,6 +147,7 @@ public class Game extends AppCompatActivity implements SensorEventListener {
 
             @Override
             public void onFinish() {
+                endGame();
 
             }
         }.start();
