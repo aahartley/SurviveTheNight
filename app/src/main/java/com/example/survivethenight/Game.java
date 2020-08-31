@@ -21,6 +21,7 @@ import java.io.IOException;
 public class Game extends AppCompatActivity implements SensorEventListener {
     public int bullets =2;
     private boolean shot = false;
+    private boolean win = false;
     public int counter =0;
     private SensorManager sM;
     private Sensor aS;
@@ -31,8 +32,6 @@ public class Game extends AppCompatActivity implements SensorEventListener {
     private float lastZ;
     public boolean reload = false;
     MediaPlayer mP;
-    // MediaPlayer mP2;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +55,7 @@ public class Game extends AppCompatActivity implements SensorEventListener {
         final TextView tV = findViewById(R.id.time2);
         final TextView tv2 = findViewById(R.id.time3);
 
-        new CountDownTimer(141000,1000){
+        new CountDownTimer(124000,1000){
             @Override
             public void onTick(long millisUntilFinished) {
 
@@ -66,7 +65,6 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                 counter++;
 
                 if(reload){
-                    tV.setText(String.valueOf(bullets));
                   die();
                     reload = false;
                 }
@@ -106,28 +104,28 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                     cancel();
                     endGame();
                 }
-                if(counter ==47){
+                if(counter ==56){
                     shot = false;
                 }
-                if(counter ==49&& !shot) {
+                if(counter ==58&& !shot) {
                     mP.release();
                     die();
                     cancel();
                     endGame();
                 }
-                if(counter ==74){
+                if(counter ==70){
                     shot = false;
                 }
-                if(counter ==76&& !shot) {
+                if(counter ==72&& !shot) {
                     mP.release();
                     die();
                     cancel();
                     endGame();
                 }
-                if(counter ==130){
+                if(counter ==104){
                     shot = false;
                 }
-                if(counter ==132&& !shot) {
+                if(counter ==106&& !shot) {
                     mP.release();
                     die();
                     cancel();
@@ -140,6 +138,7 @@ public class Game extends AppCompatActivity implements SensorEventListener {
 
             @Override
             public void onFinish() {
+                win = true;
                 mP.release();
                 endGame();
 
@@ -188,6 +187,7 @@ public class Game extends AppCompatActivity implements SensorEventListener {
     }
     public void endGame(){
         Intent intent = new Intent(this,End.class);
+        intent.putExtra("win",win);
         startActivity(intent);
         finish();
     }

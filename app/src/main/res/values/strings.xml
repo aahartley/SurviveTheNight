@@ -2,4 +2,5 @@
     <string name="app_name">Survive the Night</string>
     <string name="textview">TextView</string>
     <string name="youLose">you lose</string>
+    <string name="youWin">you win</string>
 </resources>
