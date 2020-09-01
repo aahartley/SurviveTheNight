@@ -25,7 +25,6 @@ public class End extends AppCompatActivity {
         if (win) {
             tV.setText(R.string.youWin);
             speakWin();
-            finish();
 
 
         }
@@ -38,6 +37,7 @@ public class End extends AppCompatActivity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                textToSpeech.stop();
                 startOver();
             }
         });
@@ -56,15 +56,15 @@ public class End extends AppCompatActivity {
     public void startOver(){
         Intent intent = new Intent(this,Game.class);
         startActivity(intent);
-        finish();
     }
     public void speakWin(){
-        final String msg ="Congratulations you have won the game, the app has closed";
+        final String msg ="Congratulations you have won the game";
         textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
                     textToSpeech.setLanguage(Locale.ENGLISH);
+                    textToSpeech.setSpeechRate(.90f);
                     textToSpeech.speak(msg,TextToSpeech.QUEUE_FLUSH, null);
 
                 }
@@ -79,6 +79,7 @@ public class End extends AppCompatActivity {
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
                     textToSpeech.setLanguage(Locale.ENGLISH);
+                    textToSpeech.setSpeechRate(.90f);
                     textToSpeech.speak(msg,TextToSpeech.QUEUE_FLUSH, null);
 
                 }

@@ -9,6 +9,7 @@ import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -55,19 +56,19 @@ public class Game extends AppCompatActivity implements SensorEventListener {
         final TextView tV = findViewById(R.id.time2);
         final TextView tv2 = findViewById(R.id.time3);
 
-        new CountDownTimer(124000,1000){
+        new CountDownTimer(112000,1000){
             @Override
             public void onTick(long millisUntilFinished) {
-
                 tV.setText((String.valueOf(counter)));
                 tv2.setText(String.valueOf(bullets));
 
                 counter++;
 
                 if(reload){
-                  die();
-                    reload = false;
+                  reload();
+                   reload = false;
                 }
+
                 if(counter ==1){
                     shot = false;
                 }
@@ -75,7 +76,13 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                         mP.release();
                         die();
                         cancel();
-                        endGame();
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
+                                // Actions to do after 5 seconds
+                                endGame();
+                            }
+                        }, 3000);
                     }
                     if(counter == 12) {
                         shot = false;
@@ -83,8 +90,14 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                          if(counter ==14 && !shot) {
                              mP.release();
                              die();
-                            cancel();
-                            endGame();
+                             cancel();
+                             Handler handler = new Handler();
+                             handler.postDelayed(new Runnable() {
+                                 public void run() {
+                                     // Actions to do after 5 seconds
+                                     endGame();
+                                 }
+                             }, 3000);
                 }
                 if(counter ==28){
                     shot = false;
@@ -93,7 +106,13 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                     mP.release();
                     die();
                     cancel();
-                    endGame();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            // Actions to do after 5 seconds
+                            endGame();
+                        }
+                    }, 3000);
                 }
                 if(counter ==42){
                     shot = false;
@@ -102,7 +121,13 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                     mP.release();
                     die();
                     cancel();
-                    endGame();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            // Actions to do after 5 seconds
+                            endGame();
+                        }
+                    }, 3000);
                 }
                 if(counter ==56){
                     shot = false;
@@ -111,7 +136,13 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                     mP.release();
                     die();
                     cancel();
-                    endGame();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            // Actions to do after 5 seconds
+                            endGame();
+                        }
+                    }, 3000);
                 }
                 if(counter ==70){
                     shot = false;
@@ -120,7 +151,13 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                     mP.release();
                     die();
                     cancel();
-                    endGame();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            // Actions to do after 5 seconds
+                            endGame();
+                        }
+                    }, 3000);
                 }
                 if(counter ==104){
                     shot = false;
@@ -129,7 +166,13 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                     mP.release();
                     die();
                     cancel();
-                    endGame();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            // Actions to do after 5 seconds
+                            endGame();
+                        }
+                    }, 3000);
                 }
 
 
@@ -156,26 +199,37 @@ public class Game extends AppCompatActivity implements SensorEventListener {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MediaPlayer mP2;
 
-                mP2 = MediaPlayer.create(Game.this,R.raw.gun);
-                if(bullets >0) {
-                    mP2.start();
-                    if(!mP2.isPlaying()) {
-                        mP2.release();
-                        try {
-                            mP2.prepare();
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                    MediaPlayer mP2;
+
+                    if (bullets > 0) {
+                        mP2 = MediaPlayer.create(Game.this, R.raw.gun);
+                        mP2.start();
+                        if (!mP2.isPlaying()) {
+                            mP2.release();
+                            try {
+                                mP2.prepare();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        bullets--;
+                        tv2.setText(String.valueOf(bullets));
+                        shot = true;
+
+                    } else {
+                        shot = false;
+                        mP2 = MediaPlayer.create(Game.this,R.raw.drygun);
+                        mP2.start();
+                        if (!mP2.isPlaying()) {
+                            mP2.release();
+                            try {
+                                mP2.prepare();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
-                    bullets --;
-                    tv2.setText(String.valueOf(bullets));
-                    shot=true;
-
-                }
-                else
-                    shot = false;
 
             }
         });
@@ -199,6 +253,15 @@ public class Game extends AppCompatActivity implements SensorEventListener {
         if(!mP2.isPlaying()){
             mP2.release();
         }
+        }
+        public void reload(){
+            MediaPlayer mP2;
+
+            mP2 =MediaPlayer.create(Game.this,R.raw.reload);
+            mP2.start();
+            if(!mP2.isPlaying()){
+                mP2.release();
+            }
         }
 
     @Override

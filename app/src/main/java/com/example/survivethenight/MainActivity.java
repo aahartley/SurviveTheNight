@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
                     textToSpeech.setLanguage(Locale.ENGLISH);
-                    textToSpeech.speak(msg,TextToSpeech.QUEUE_FLUSH, null);
+                    textToSpeech.setSpeechRate(.90f);
+                textToSpeech.speak(msg,TextToSpeech.QUEUE_FLUSH, null);
 
                 }
             }
