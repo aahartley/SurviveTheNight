@@ -58,7 +58,7 @@ public class End extends AppCompatActivity {
         startActivity(intent);
     }
     public void speakWin(){
-        final String msg ="Congratulations you have won the game";
+        final String msg ="Congratulations you have survived the night";
         textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -73,7 +73,7 @@ public class End extends AppCompatActivity {
 
     }
     public void speakLose(){
-        final String msg ="Unfortunately you have lost, you can tap to restart or long press to end game";
+        final String msg ="Unfortunately, you did not survive the night. You can tap to restart or long press to end the game";
         textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {

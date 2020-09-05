@@ -264,6 +264,7 @@ public class Game extends AppCompatActivity implements SensorEventListener {
             }
         }
 
+
     @Override
     public void onSensorChanged(SensorEvent event) {
         float currentX = event.values[0];

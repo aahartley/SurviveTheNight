@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +18,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        speakIntro();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                // Actions to do after 5 seconds
+                speakIntro();
+
+            }
+        }, 500);
         final Button startBt = findViewById(R.id.startBt);
 
        startBt.setOnClickListener(new View.OnClickListener() {
@@ -36,9 +45,12 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
     public void speakIntro(){
-        final String msg ="Welcome to Survive the Night, the premise is simple"+
-                " you must survive the wild equipped only with a revolver with two bullets left and only one reload of six available" +
-                ", tap anywhere to shoot and shake to reload, use them wisely as only certain noises will kill you, good luck";
+        final String msg ="Welcome to Survive the Night, the premise is simple. "+
+                "You are equipped with a revolver to scare away the local wildlife. " +
+                "You currently have two bullets in the cylinder. You can reload once for an " +
+                "additional six bullets. Only certain noises will kill you, so use them wisely. " +
+                "Tap anywhere to shoot. Shake to reload. " +
+                "The game will start when you're ready to begin . Good luck!";
         textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -52,5 +64,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    
+
+
 
 }
