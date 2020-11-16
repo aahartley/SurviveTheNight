@@ -12,7 +12,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+//import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -53,14 +53,17 @@ public class Game extends AppCompatActivity implements SensorEventListener {
         mP.start();
 
 
-        final TextView tV = findViewById(R.id.time2);
-        final TextView tv2 = findViewById(R.id.time3);
+      //  final TextView tV = findViewById(R.id.time2);
+       // final TextView tv2 = findViewById(R.id.time3);
+        final Button bt = findViewById(R.id.button);
+
 
         new CountDownTimer(112000,1000){
             @Override
             public void onTick(long millisUntilFinished) {
-                tV.setText((String.valueOf(counter)));
-                tv2.setText(String.valueOf(bullets));
+             //   tV.setText((String.valueOf(counter)));
+            //    tv2.setText(String.valueOf(bullets));
+
 
                 counter++;
 
@@ -73,13 +76,14 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                     shot = false;
                 }
                     if(counter ==3&& !shot) {
+                        bt.setEnabled(false);
                         mP.release();
                         die();
                         cancel();
                         Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             public void run() {
-                                // Actions to do after 5 seconds
+                                // Actions to do after 3 seconds
                                 endGame();
                             }
                         }, 3000);
@@ -88,13 +92,14 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                         shot = false;
                     }
                          if(counter ==14 && !shot) {
+                             bt.setEnabled(false);
                              mP.release();
                              die();
                              cancel();
                              Handler handler = new Handler();
                              handler.postDelayed(new Runnable() {
                                  public void run() {
-                                     // Actions to do after 5 seconds
+                                     // Actions to do after 3 seconds
                                      endGame();
                                  }
                              }, 3000);
@@ -103,13 +108,14 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                     shot = false;
                 }
                 if(counter ==30&& !shot) {
+                    bt.setEnabled(false);
                     mP.release();
                     die();
                     cancel();
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         public void run() {
-                            // Actions to do after 5 seconds
+                            // Actions to do after 3 seconds
                             endGame();
                         }
                     }, 3000);
@@ -118,13 +124,14 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                     shot = false;
                 }
                 if(counter ==44&& !shot) {
+                    bt.setEnabled(false);
                     mP.release();
                     die();
                     cancel();
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         public void run() {
-                            // Actions to do after 5 seconds
+                            // Actions to do after 3 seconds
                             endGame();
                         }
                     }, 3000);
@@ -133,13 +140,14 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                     shot = false;
                 }
                 if(counter ==58&& !shot) {
+                    bt.setEnabled(false);
                     mP.release();
                     die();
                     cancel();
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         public void run() {
-                            // Actions to do after 5 seconds
+                            // Actions to do after 3 seconds
                             endGame();
                         }
                     }, 3000);
@@ -148,13 +156,14 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                     shot = false;
                 }
                 if(counter ==72&& !shot) {
+                    bt.setEnabled(false);
                     mP.release();
                     die();
                     cancel();
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         public void run() {
-                            // Actions to do after 5 seconds
+                            // Actions to do after 3 seconds
                             endGame();
                         }
                     }, 3000);
@@ -163,13 +172,14 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                     shot = false;
                 }
                 if(counter ==106&& !shot) {
+                    bt.setEnabled(false);
                     mP.release();
                     die();
                     cancel();
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         public void run() {
-                            // Actions to do after 5 seconds
+                            // Actions to do after 3 seconds
                             endGame();
                         }
                     }, 3000);
@@ -192,7 +202,6 @@ public class Game extends AppCompatActivity implements SensorEventListener {
 
 
 
-        final Button bt = findViewById(R.id.button);
 
 
 
@@ -214,7 +223,7 @@ public class Game extends AppCompatActivity implements SensorEventListener {
                             }
                         }
                         bullets--;
-                        tv2.setText(String.valueOf(bullets));
+                     //   tv2.setText(String.valueOf(bullets));
                         shot = true;
 
                     } else {
