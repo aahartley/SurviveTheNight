@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,16 +19,13 @@ public class End extends AppCompatActivity {
         setContentView(R.layout.activity_end);
         Intent intent = getIntent();
         boolean win = intent.getExtras().getBoolean("win");
-        TextView tV = findViewById(R.id.textView2);
 
         if (win) {
-            tV.setText(R.string.youWin);
             speakWin();
 
 
         }
         else{
-            tV.setText(R.string.youLose);
             speakLose();
 
         }
@@ -58,7 +54,7 @@ public class End extends AppCompatActivity {
         startActivity(intent);
     }
     public void speakWin(){
-        final String msg ="Congratulations you have survived the night";
+        final String msg ="Congratulations you have survived the night. Long press to end the game";
         textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
